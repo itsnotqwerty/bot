@@ -1,5 +1,5 @@
 from PIL import Image, ImageDraw, ImageFont, ImageEnhance
-from mathutils import i_floor, attempt_cast
+from utils import i_floor, attempt_cast
 
 
 def execute_image_operation(filepath, operation, *args):

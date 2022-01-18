@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from commands import create_image_command, _caption, _echo
-from imgutils import \
+from images import \
     squish, \
     brighten, \
     saturate, \

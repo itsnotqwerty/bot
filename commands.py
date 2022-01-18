@@ -1,9 +1,9 @@
 import discord
 from discord.ext import commands
-from fileutils import \
+from files import \
     save_image, \
     delete_images_after
-from imgutils import \
+from images import \
     execute_image_operation, \
     caption
 import errors

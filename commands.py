@@ -6,6 +6,7 @@ from files import \
 from images import \
     execute_image_operation, \
     caption
+from databases import db_connect, db_lookup
 import errors
 from errors import report_error
 

@@ -1,10 +1,13 @@
-from PIL import Image, ImageDraw, ImageFont, ImageEnhance
+from PIL import Image, ImageDraw, ImageFont, ImageEnhance, UnidentifiedImageError
 from utils import i_floor, attempt_cast
 
 
 def execute_image_operation(filepath, operation, *args):
     print("Executing image operation...")
-    img = Image.open(filepath)
+    try:
+        img = Image.open(filepath)
+    except UnidentifiedImageError:
+        return False
     img = img.convert("RGB")
     img = operation(img, *args)
     if img is None:

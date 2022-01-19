@@ -10,4 +10,13 @@ def attempt_cast(cast, var):
         cast(var)
         return True
     except ValueError:
+        log("Unable to cast argument to required type")
         return False
+
+
+def log(n):
+    print(n)
+    f = open('log.txt', 'a')
+    f.write(n + '\n')
+    f.close()
+    return n

@@ -1,14 +1,11 @@
 NO_ATTACHMENT_ERROR = "No suitable attachment found"
 OPERATION_FAILED_ERROR = "Unable to perform operation"
+NO_ARGUMENTS_ERROR = "Command requires at least one argument and none were found"
 
 
-def report_warning(warn):
-    warning = f"Warning: {warn}"
-    print(warning)
-    return warning
+def warning(warn):
+    return f"Warning: {warn}"
 
 
-def report_error(err):
-    error = f"Error: {err}"
-    print(error)
-    return error
+def error(err):
+    return f"Error: {err}"

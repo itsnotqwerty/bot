@@ -1,11 +1,12 @@
 import discord
 from discord.ext import commands
-from commands import create_image_command, _caption, _echo, _whois
+from commands import create_image_command, _caption, _echo
 from images import \
     squish, \
     brighten, \
     saturate, \
     deepfry
+from utils import log
 from secrets import token
 
 
@@ -40,7 +41,7 @@ bot.add_command(_echo)
 async def on_message(message):
     if message.author.bot:
         return
-    print(f"{message.author}: {message.content}")
+    log(f"{message.created_at} in #{message.channel} || {message.author}: {message.content}")
     await bot.process_commands(message)
 
 

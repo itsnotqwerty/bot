@@ -1,2 +1,3 @@
 sqlite3
-files/databases/bot.db
+files/databases/*.db
+log.txt

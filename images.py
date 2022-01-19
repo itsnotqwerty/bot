@@ -1,12 +1,12 @@
 from PIL import Image, ImageDraw, ImageFont, ImageEnhance, UnidentifiedImageError
-from utils import i_floor, attempt_cast
+from utils import i_floor, attempt_cast, log
 
 
 def execute_image_operation(filepath, operation, *args):
-    print("Executing image operation...")
     try:
         img = Image.open(filepath)
     except UnidentifiedImageError:
+        log("Unable to open attachment as image")
         return False
     img = img.convert("RGB")
     img = operation(img, *args)

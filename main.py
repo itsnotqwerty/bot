@@ -6,6 +6,7 @@ from images import \
     brighten, \
     saturate, \
     deepfry
+from files import check_for_attachments
 from utils import log
 from secrets import token
 
@@ -42,6 +43,15 @@ async def on_message(message):
     if message.author.bot:
         return
     log(f"{message.created_at} in #{message.channel} || {message.author}: {message.content}")
+    if check_for_attachments(message):
+        for attachment in message.attachments:
+            log(
+                "Attachment: ["
+                f"\n\tFilename: {attachment.filename}"
+                f"\n\tMedia Type: {attachment.content_type}"
+                f"\n\tURL: {attachment.url}"
+                "\n]"
+            )
     await bot.process_commands(message)
 
 

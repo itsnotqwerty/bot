@@ -42,7 +42,7 @@ bot.add_command(_echo)
 async def on_message(message):
     if message.author.bot:
         return
-    log(f"{message.created_at} in #{message.channel} || {message.author}: {message.content}")
+    log(f"{message.created_at} in #{message.channel} || {message.author} ({message.author.id}): {message.content}")
     if check_for_attachments(message):
         for attachment in message.attachments:
             log(

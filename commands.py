@@ -5,7 +5,8 @@ from files import \
     delete_images_after
 from images import \
     execute_image_operation, \
-    caption
+    caption, \
+    tribute
 from utils import log
 import errors
 from errors import error
@@ -22,12 +23,32 @@ async def _echo(ctx, *args):
 @commands.command(name="caption")
 @delete_images_after
 async def _caption(ctx, *args):
+    if not args:
+        err = error(errors.NO_ARGUMENTS_ERROR)
+        log(err)
+        return await ctx.send(err)
     filepath = await save_image(ctx.message)
     if filepath is None:
         err = error(errors.NO_ATTACHMENT_ERROR)
         log(err)
         return await ctx.send(err)
     if execute_image_operation(filepath, caption, ' '.join(args)):
+        file = discord.File(filepath)
+        return await ctx.send(file=file)
+    err = error(errors.OPERATION_FAILED_ERROR)
+    log(err)
+    return await ctx.send(err)
+
+
+@commands.command(name="tribute")
+@delete_images_after
+async def _tribute(ctx, *args):
+    filepath = await save_image(ctx.message)
+    if filepath is None:
+        err = error(errors.NO_ATTACHMENT_ERROR)
+        log(err)
+        return await ctx.send(err)
+    if execute_image_operation(filepath, tribute):
         file = discord.File(filepath)
         return await ctx.send(file=file)
     err = error(errors.OPERATION_FAILED_ERROR)

@@ -1,3 +1,5 @@
+import random
+
 from PIL import Image, ImageDraw, ImageFont, ImageEnhance, UnidentifiedImageError
 from utils import i_floor, attempt_cast, log
 
@@ -12,6 +14,7 @@ def execute_image_operation(filepath, operation, *args):
     img = operation(img, *args)
     if img is None:
         return False
+    img = img.convert("RGB")
     img.save(filepath)
     img.close()
     return True
@@ -108,3 +111,14 @@ def caption(img, text):
     # Paste original image onto base
     base.paste(img, (0, i_floor(img.height / 4)))
     return base
+
+
+def tribute(img):
+    img = img.convert("RGBA")
+    i_num = i_floor((random.random() * 3) + 1)
+    t = Image.open(f"files/images/tribute{i_num}.png")
+    t = t.convert("RGBA")
+    t = rescale(t, (img.width / t.width, img.height / t.height))
+    img.paste(t, (0, 0), t)
+    return img
+

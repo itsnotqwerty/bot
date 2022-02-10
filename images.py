@@ -1,7 +1,6 @@
-import random
-
 from PIL import Image, ImageDraw, ImageFont, ImageEnhance, UnidentifiedImageError
 from utils import i_floor, attempt_cast, log
+import random
 
 
 def execute_image_operation(filepath, operation, *args):
@@ -115,7 +114,7 @@ def caption(img, text):
 
 def tribute(img):
     img = img.convert("RGBA")
-    i_num = i_floor((random.random() * 3) + 1)
+    i_num = i_floor((random.random() * 4) + 1)
     t = Image.open(f"files/images/tribute{i_num}.png")
     t = t.convert("RGBA")
     t = rescale(t, (img.width / t.width, img.height / t.height))

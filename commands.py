@@ -40,7 +40,7 @@ async def _roll(ctx, *args):
         if re.match(r"^[0-9]{1,3}d[0-9]{1,8}$", args[0]):
             k, n = args[0].split('d')
             if int(k) == 1:
-                return await ctx.send(random_within_range(1, n))
+                return await ctx.send(random_within_range(1, int(n)))
             y = []
             for i in range(0, int(k)):
                 y.append(random_within_range(1, int(n)))

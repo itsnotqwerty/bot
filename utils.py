@@ -16,7 +16,6 @@ def attempt_cast(cast, var):
         cast(var)
         return True
     except ValueError:
-        log("Unable to cast argument to required type")
         return False
 
 

@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from commands import create_image_command, _caption, _echo, _tribute
+from commands import create_image_command, _caption, _echo, _tribute, _roll
 from images import \
     squish, \
     brighten, \
@@ -37,6 +37,7 @@ for command in image_commands:
 bot.add_command(_caption)
 bot.add_command(_echo)
 bot.add_command(_tribute)
+bot.add_command(_roll)
 
 
 @bot.event

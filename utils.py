@@ -1,8 +1,14 @@
-﻿import numpy as np
+﻿import random
+
+import numpy as np
 
 
 def i_floor(x):
     return int(np.floor(x))
+
+
+def random_within_range(n, m):
+    return i_floor(random.random() * (m - n + 1)) + n
 
 
 def attempt_cast(cast, var):

@@ -1,5 +1,7 @@
 import discord
 from discord.ext import commands
+import re
+import numpy as np
 from files import \
     save_image, \
     delete_images_after
@@ -7,7 +9,10 @@ from images import \
     execute_image_operation, \
     caption, \
     tribute
-from utils import log
+from utils import \
+    log,\
+    attempt_cast, \
+    random_within_range
 import errors
 from errors import error
 
@@ -18,6 +23,28 @@ async def _echo(ctx, *args):
         await ctx.send(' '.join(args))
     except discord.errors.HTTPException:
         await ctx.send("echo!")
+
+
+@commands.command(name="roll")
+async def _roll(ctx, *args):
+    if not args:
+        return await ctx.send(random_within_range(1, 20))
+    if attempt_cast(int, args[0]):
+        n = int(args[0])
+        if n >= 1:
+            return await ctx.send(random_within_range(1, n))
+        if n <= -1:
+            return await ctx.send(random_within_range(-1, n))
+        return await ctx.send(0)
+    if re.match(r"^[0-9]+d[0-9]+$", args[0]):
+        k, n = args[0].split('d')
+        y = []
+        for i in range(0, int(k)):
+            y.append(random_within_range(1, int(n)))
+        return await ctx.send(f"{y}: {np.sum(y)}")
+    if attempt_cast(float, args[0]):
+        return await ctx.send("Sorry! Floating point numbers aren't supported!")
+    return await ctx.send("Error: One or more invalid arguments")
 
 
 @commands.command(name="caption")

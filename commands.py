@@ -36,12 +36,15 @@ async def _roll(ctx, *args):
         if n <= -1:
             return await ctx.send(random_within_range(-1, n))
         return await ctx.send(0)
-    if re.match(r"^[0-9]+d[0-9]+$", args[0]):
-        k, n = args[0].split('d')
-        y = []
-        for i in range(0, int(k)):
-            y.append(random_within_range(1, int(n)))
-        return await ctx.send(f"{y}: {np.sum(y)}")
+    try:
+        if re.match(r"^[0-9]+d[0-9]+$", args[0]):
+            k, n = args[0].split('d')
+            y = []
+            for i in range(0, int(k)):
+                y.append(random_within_range(1, int(n)))
+            return await ctx.send(f"{y}: {np.sum(y)}")
+    except discord.errors.HTTPException:
+        return await ctx.send("Error: Too many parameters")
     if attempt_cast(float, args[0]):
         return await ctx.send("Sorry! Floating point numbers aren't supported!")
     return await ctx.send("Error: One or more invalid arguments")
